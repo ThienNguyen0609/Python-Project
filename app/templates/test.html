@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'css/test.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="counting">
+                <p class="content margin">counting</p>
+                <p id="count" class="margin">0</p>
+                <div class="margin">
+                    <button class="inc-btn btn">Increase</button>
+                    <button class="rst-btn btn">Reset</button>
+                    <button class="dec-btn btn">Decrese</button>
+                </div>
+            </div>
+        </div>
+        <script src="{% static 'js/test.js' %}"></script>
+    </body>
+</html>

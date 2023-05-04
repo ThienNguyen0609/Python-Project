@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block detail %}
+    <div class="container-detail">
+        <a  class="btn btn-outline-dark" href="{% url 'home' %}">&#x2190; Continue Shopping</a>
+        <div class="detail-inner">
+            <img class="image" src="{{product.image.url}}">
+            <div class="detail-content">
+                <div class="content">
+                    <h2><strong>{{product.name}}</strong></h2>
+                    <p>{{product.describe}}</p>
+                    <p>{{product.price}}</p>
+                </div>
+                <button data-product="{{product.id}}" data-action="add" class="btn add-btn add-to-card">Add to card</button>
+            </div>
+        </div>
+    </div>
+{% endblock detail %}

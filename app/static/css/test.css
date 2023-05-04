@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    background-color: #c4ca25;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.counting {
+    background-color: #bd78cb;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.content, .cnt {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 600;
+}
+.margin {
+    margin: 5px;
+}
+.btn, .counting {
+    border: none;
+    border-radius: 5px;
+}
+.btn {   
+    background-color: #fff;
+    width: 100px;
+    padding: 10px;
+    margin: 4px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+.btn:hover {
+    background-color: #ccc;
+}

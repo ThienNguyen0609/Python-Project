@@ -6,6 +6,20 @@ import json
 from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
+def Register(request):
+    form = CreateUserForm()
+    if request.method == "POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {
+        'form': form
+    }
+    return render(request, "register.html", context)
+
+def Login(request):
+    return render(request, "login.html", {})
+
 def Home(request):
     if request.user.is_authenticated:
         customer = request.user.customer
@@ -71,12 +85,9 @@ def updateItem(request):
     product = Product.objects.get(id=productId)
     order, created = Order.objects.get_or_create(customer= customer, complete = False)
     orderItem, created = OrderItem.objects.get_or_create(order= order, product = product)
-    if orderItem.quantity == 0:
-        if action == 'add':
-            orderItem.quantity = 1
-            orderItem.save()
-    else:
-        return JsonResponse("have already added", safe=False)
+    if action == 'add':
+        orderItem.quantity += 1
+        orderItem.save()
     return JsonResponse("added", safe=False)
 
 def Inc_Dec_Item(request):

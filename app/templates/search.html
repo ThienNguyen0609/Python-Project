@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block search %}
+<div class="container-product">
+    {% for prod in products %}
+        <div class="product-item">
+            <img class="image" src="{{prod.image.url}}">
+            <div class="content">
+                <p>{{prod.name}}</p>
+                <p>${{prod.price}}</p>
+                <div class="row">
+                    <a href="/detail/{{prod.id}}" class="link colu-2">Detail</a>
+                    <button data-product="{{prod.id}}" data-action="add" class="btn add-btn add-to-card colu-2">Add to card</button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock search %}
+        

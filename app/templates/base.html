@@ -13,7 +13,7 @@
         <script src="https://kit.fontawesome.com/c638960eab.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav style="position: fixed; z-index: 9999; width: 100%;" class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Navbar</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,39 +24,58 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Products
+                            </a>
+                            <ul style="right: 0; top: 100%;" class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Technology</a></li>
+                                <li><a class="dropdown-item" href="#">Food</a></li>
+                                <li><a class="dropdown-item" href="#">Houseware</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex" action="{% url 'search' %}" method="POST">
+                        {% csrf_token %}
+                        <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                    <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link" href="/cart"><i class="fas fa-shopping-cart"></i><span id="upd-quantity-cart">{{cartItems}}</span></a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
+                        <li class="nav-item" style="display: {{user_not_login}}">
+                            <a id="move-to-signup" class="nav-link active" aria-current="page" href="{% url 'register' %}">Signup</a>
+                        </li>
+                        <li class="nav-item" style="display: {{user_not_login}}">
+                            <a id="move-to-login" class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item dropdown dropstart" style="display: {{user_login}}">
+                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{request.user}}
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <ul style="right: 0; top: 100%;" class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">My account</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                        </li>
                     </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
                 </div>
             </div>
         </nav>
 
-        {% block slide_bar %}{% endblock slide_bar %}
-        <div class="container">
-            {% block product %}{% endblock product %}
-            {% block detail %}{% endblock detail %}
-            {% block cart_content %}{% endblock cart_content %}
+        <div style="position: relative; top: 56px; width: 100%;">
+            {% block slide_bar %}{% endblock slide_bar %}
+            <div class="container">
+                {% block product %}{% endblock product %}
+                {% block detail %}{% endblock detail %}
+                {% block cart_content %}{% endblock cart_content %}
+                {% block search %}{% endblock search %}
+            </div>
         </div>
         <script src="{% static 'js/card.js' %}"></script>
+        <script src="{% static 'js/myscript.js' %}"></script>
         <script type="text/javascript">
             let user = '{{request.user}}'
             function getCookie(name) {
